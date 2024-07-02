@@ -10,8 +10,7 @@ Original file is located at
 import streamlit as st
 from transformers import GPT2LMHeadModel, GPT2Tokenizer
 from PIL import Image
-import requests
-from io import BytesIO
+import os
 
 st.title("AI-Powered Meme Generator")
 
@@ -30,16 +29,19 @@ if uploaded_file is not None:
         st.write("Generating meme...")
 
         # Load the local GPT-2 model and tokenizer
-        model_path = "gpt2_model"
-        model = GPT2LMHeadModel.from_pretrained(model_path)
-        tokenizer = GPT2Tokenizer.from_pretrained(model_path)
-
-        if context:
-            # Generate meme caption using the local GPT-2 model
-            inputs = tokenizer.encode(context, return_tensors='pt')
-            outputs = model.generate(inputs, max_length=50, num_return_sequences=1)
-            meme_caption = tokenizer.decode(outputs[0], skip_special_tokens=True)
-
-            st.write(f"Generated Meme Caption: {meme_caption}")
+        model_path = "."
+        if not os.path.exists(model_path):
+            st.error(f"The model path {model_path} does not exist.")
         else:
-            st.write("Please provide context for the meme.")
+            model = GPT2LMHeadModel.from_pretrained(model_path)
+            tokenizer = GPT2Tokenizer.from_pretrained(model_path)
+
+            if context:
+                # Generate meme caption using the local GPT-2 model
+                inputs = tokenizer.encode(context, return_tensors='pt')
+                outputs = model.generate(inputs, max_length=50, num_return_sequences=1)
+                meme_caption = tokenizer.decode(outputs[0], skip_special_tokens=True)
+
+                st.write(f"Generated Meme Caption: {meme_caption}")
+            else:
+                st.write("Please provide context for the meme.")
