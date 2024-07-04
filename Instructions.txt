@@ -9,7 +9,6 @@ pip install gtts
 pip install torch
 pip install sentencepiece
 pip install pydub
-pip install pyaudio
 pip install sacremoses
 
 streamlit run app.py
