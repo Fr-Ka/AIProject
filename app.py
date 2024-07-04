@@ -7,13 +7,19 @@ import os
 models = {
     "French": "Helsinki-NLP/opus-mt-en-fr",
     "Spanish": "Helsinki-NLP/opus-mt-en-es",
-    "Hebrew": "Helsinki-NLP/opus-mt-en-he"
+    "Hebrew": "Helsinki-NLP/opus-mt-en-he",
+    "German": "Helsinki-NLP/opus-mt-en-de",
+    "Italian": "Helsinki-NLP/opus-mt-en-it",
+    "Chinese": "Helsinki-NLP/opus-mt-en-zh"
 }
 
 # Mapping for gTTS language codes
 language_codes = {
     "French": "fr",
-    "Spanish": "es"
+    "Spanish": "es",
+    "German": "de",
+    "Italian": "it",
+    "Chinese": "zh"
 }
 
 st.title("Interactive Language Translator")
@@ -23,7 +29,7 @@ phrase = st.text_input("Enter a phrase in English:")
 
 language = st.selectbox(
     "Select the language to translate to:",
-    options=["French", "Spanish", "Hebrew"]
+    options=["French", "Spanish", "Hebrew", "German", "Italian", "Chinese"]
 )
 
 if st.button("Translate"):
@@ -45,6 +51,7 @@ if st.button("Translate"):
             st.write("Audio output is not supported for this language.")
     else:
         st.write("Please enter a phrase.")
+
 
 
 
