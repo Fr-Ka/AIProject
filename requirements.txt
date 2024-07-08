@@ -1,7 +1,12 @@
 streamlit
 transformers
 torch
+ollama
+huggingface-hub
+speechrecognition
 gtts
 pydub
+pyaudio
 sentencepiece
 sacremoses
+pyttsx3
